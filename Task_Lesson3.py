@@ -28,4 +28,5 @@ print('Сколько раз встречаются слова:', text_dict)
 text_top_list = list(text_dict.items())
 text_top_list.sort(key = lambda i: i[1], reverse=True)
 print('TOP-5 часто встречающихся слов:', text_top_list[:5])
+print('Всего в тексте', len(text_dict),'разных слов')
 
