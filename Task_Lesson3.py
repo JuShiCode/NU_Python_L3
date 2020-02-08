@@ -18,15 +18,26 @@ print('Список всех слов текста:', text_list)
 text_lower = list(map(lambda x: str(x).lower(), text_list))
 print('Список слов в нижнем регистре:', text_lower)
 
-# # 3) получить из list пункта 3 dict, ключами которого являются слова, а значениями их количество появлений в тексте;
+# провести лемматизацию текста;
+import pymorphy2
+morph = pymorphy2.MorphAnalyzer()
+text_normalized = str()
+for word in text_lower:
+    word = morph.parse(word)[0]
+    text_normalized += word.normal_form + " "
+text_lower = list(text_normalized.split())
+print('Список нормализованных слов:', text_lower)
+
+# 4) получить из list пункта 3 dict, ключами которого являются слова, а значениями их количество появлений в тексте;
 text_dict = {}
 for i in range (len(text_lower)):
     text_dict[text_lower[i]] = text_lower.count(text_lower[i])
 print('Сколько раз встречаются слова:', text_dict)
 
-# 4) вывести 5 наиболее часто встречающихся слов (sort), вывести количество разных слов в тексте (set).
+# 5) вывести 5 наиболее часто встречающихся слов (sort), вывести количество разных слов в тексте (set).
 text_top_list = list(text_dict.items())
 text_top_list.sort(key = lambda i: i[1], reverse=True)
 print('TOP-5 часто встречающихся слов:', text_top_list[:5])
 # print('Всего в тексте', len(text_dict),'разных слов')
 print('Всего в тексте', len(set(text_lower)),'разных слов')
+
